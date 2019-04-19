@@ -1,0 +1,62 @@
+#include <iostream>
+
+using namespace std;
+
+template<class T>
+class stack
+{
+    int sz;
+    int top;
+    T *s;
+    public:
+    stack(int n=1)
+    {
+        sz=n;
+        s=new T[sz];
+        top=-1;
+    }
+    ~stack(){
+    delete[] s;
+    }
+    bool isfull(){
+        return top==sz-1;}
+    bool isempty(){
+        return top==-1;
+    }
+    stack<T>& push(const T &x)
+    {
+        if (!isfull())
+            s[++top]=x;
+            return *this;
+
+    }
+    T& pop()
+    {
+        if(!isempty())
+            return s[top--];
+    }
+    void Print() {
+		int i;
+		cout<<"Stack: ";
+		for(i = 0;i<=top;i++)
+        {
+			cout<<s[i]<<"   ";
+        }
+		cout<<"\n";
+	}
+
+};
+
+int main()
+{
+    stack<int> a(11);
+    a.push(4);
+    a.push(3);
+   a.push(4);
+    a.push(3);
+    a.Print();
+    cout<<a.pop()<<'\n';
+    a.Print();
+
+    return 0;
+}
