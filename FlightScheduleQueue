@@ -1,0 +1,101 @@
+#include<iostream>
+#include<iomanip>
+#include"exceptions.h"
+using namespace std;
+
+template<class T>
+
+class qu
+{
+     public:
+
+    T *element;
+    int front_p;
+    int rear_p;
+    int siz,len;
+    int time[100],h;
+
+
+    qu(int sz=1)
+    {
+        siz=sz;
+        element = new T[siz];
+        front_p = rear_p = 0;
+        len=h=0;
+        time[0]=0;
+
+
+
+    }
+
+    ~qu()
+    {
+
+        delete []element;
+    }
+
+
+
+     qu<T>& insert_data(const T& x,int t)
+    {
+
+        element[++rear_p]=x;
+        len++;
+        time[h+1]=t;
+        h++;
+
+        return *this;
+
+            }
+
+             qu<T>& insert_data(const T& x,int k,int t)
+            {
+             for(int j=len;j>=1;j--)
+             {
+
+                 element[j+1]=element[j];
+
+             }
+             element[k]=x;
+             len++;
+             time[h+1]=t;
+             h++;
+             return *this;
+
+            }
+
+
+
+
+
+            qu<T>& show_data()
+
+            {
+                for(int h=1;h<=len ; h++)
+                {
+                    time[h]=time[h]+time[h-1];
+
+                    cout<<"flight NO..............9W-"<<element[h]<<endl<<"depart time = t+ "<<time[h] <<" seconds"<<endl<<endl;
+
+                }
+                return *this;
+
+            }
+
+};
+int main()
+{
+
+    qu<int> a(5);
+    a.insert_data(235,46);
+    a.insert_data(56,35);
+    a.insert_data(75,46);
+    a.insert_data(967,1,49);//priority scheduling where the aircraft is bypassed the queue and assigned first position
+    a.show_data();
+
+    return 0;
+
+}
+
+
+
